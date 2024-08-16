@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARA</title>
+    <style>
+        @font-face { 
+            font-family: "San Francisco Pro"; 
+            src: url("https://getsolara.dev/SanFranciscoPro.ttf") format("truetype"); 
+        }
+
+        :root { 
+            --purple: rgba(38,0,90,0.5); 
+            --dark-purple: rgba(23,0,47,0.5); 
+            --outline-color: #9400D3; 
+        }
+
+        body { 
+            font-family: "San Francisco Pro", sans-serif; 
+            margin: 0px; 
+            padding: 0px; 
+            overflow: hidden; 
+            background: black; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            position: relative; 
+            opacity: 0; 
+            animation: 2s ease 0s 1 normal forwards running fadeIn; 
+        }
+
+        body::before { 
+            content: ""; 
+            position: absolute; 
+            inset: 0px; 
+            z-index: 0; 
+            background: radial-gradient(circle at 20% 20%,var(--purple),transparent 60%),radial-gradient(circle at 80% 20%,var(--dark-purple),transparent 60%),radial-gradient(circle at 20% 80%,var(--purple),transparent 60%),radial-gradient(circle at 80% 80%,var(--dark-purple),transparent 60%); 
+            opacity: 0.35; 
+            pointer-events: none; 
+        }
+
+        header { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+        }
+
+        .logo { 
+            width: 150px; 
+            height: auto; 
+        }
+
+        .container { 
+            text-align: center; 
+            position: relative; 
+            z-index: 1; 
+        }
+
+        .image-wrapper { 
+            perspective: 1000px; 
+            display: inline-block; 
+            position: relative; 
+        }
+
+        .image-wrapper img { 
+            width: auto; 
+            max-width: 60%; 
+            height: auto; 
+            border-radius: 15px; 
+            border: 2px solid var(--outline-color); 
+            transform: scale(0.9); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            position: relative; 
+        }
+
+        .image-wrapper img::after { 
+            content: ""; 
+            position: absolute; 
+            top: 0px; 
+            left: 0px; 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 15px; 
+            background: linear-gradient(115deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 80%); 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+            pointer-events: none; 
+            z-index: 2; 
+        }
+
+        .image-wrapper img:hover::after { 
+            opacity: 1; 
+        }
+
+        .image-wrapper img:hover { 
+            box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 15px; 
+        }
+
+        .title { 
+            font-size: 4em; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            color: white; 
+            margin-bottom: 0.2em; 
+            transform: scale(0.9); 
+            animation: 1s ease-in-out 0s 1 normal forwards running scaleUp; 
+        }
+
+        .subtitle { 
+            font-size: 2em; 
+            font-weight: bold; 
+            color: white; 
+            transform: scale(0.9); 
+            animation: 1s ease-in-out 0s 1 normal forwards running scaleUp; 
+        }
+
+        .byfron { 
+            font-size: 1.5em; 
+            color: rgb(192, 134, 216); 
+        }
+
+        .buttons { 
+            margin-top: 1em; 
+        }
+
+        .buttons a { 
+            text-decoration: none; 
+            color: white; 
+            padding: 0.7em; 
+            margin: 0.5em; 
+            border-radius: 0.3em; 
+            border: 2px solid rgb(148, 0, 211); 
+            display: inline-block; 
+            transform: scale(0.9); 
+            animation: 1s ease-in-out 0s 1 normal forwards running scaleUp; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+            position: relative; 
+            overflow: hidden; 
+            background: none; 
+            width: 30px; 
+            height: 30px; 
+        }
+
+        .buttons img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+
+        .buttons a::before { 
+            content: ""; 
+            position: absolute; 
+            top: -50%; 
+            left: -50%; 
+            width: 200%; 
+            height: 200%; 
+            background: radial-gradient(circle, rgba(75, 0, 130, 0.3) 10%, transparent 80%); 
+            opacity: 0; 
+            pointer-events: none; 
+            transition: opacity 0.2s, transform 0.5s; 
+        }
+
+        .buttons a:hover::before { 
+            opacity: 1; 
+            transform: scale(1.2); 
+        }
+
+        .buttons a:hover { 
+            transform: scale(1.1); 
+        }
+
+        .contact-button { 
+            text-decoration: none; 
+            color: white; 
+            padding: 0.7em 1.5em; 
+            margin-top: 1em; 
+            border-radius: 0.3em; 
+            border: 2px solid rgb(148, 0, 211); 
+            display: inline-block; 
+            transform: scale(0.9); 
+            animation: 1s ease-in-out 0s 1 normal forwards running scaleUp; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+            position: relative; 
+            overflow: hidden; 
+            background: none; 
+        }
+
+        .contact-button:hover { 
+            transform: scale(1.1); 
+        }
+
+        footer { 
+            position: absolute; 
+            bottom: 10px; 
+            text-align: center; 
+            width: 100%; 
+            color: white; 
+        }
+
+        footer p { 
+            margin: 0px; 
+        }
+
+        @keyframes fadeIn { 
+            100% { opacity: 1; }
+        }
+
+        @keyframes scaleUp { 
+            100% { transform: scale(1); }
+        }
+
+        /* Rotate effect on hover based on mouse position */
+        .hover-rotate {
+            transform-style: preserve-3d;
+        }
+
+        .hover-rotate:hover {
+            transition: transform 0.2s;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="image0.png" alt="Logo" class="logo">
+    </header>
+    
+    <div class="container">
+        <div class="title">SOLARA</div>
+        <div class="subtitle">The first &amp; best external script utility after <span class="byfron">byfron</span></div>
+        <div class="image-wrapper">
+            <img src="image1.png" alt="Script Utility" class="scale-up hover-rotate" id="hover-image">
+        </div>
+        <div class="buttons scale-up">
+            <a href="download" class="button download"><img src="image2.png" alt="Download"></a>
+            <a href="discord" class="button discord"><img src="image3.png" alt="Discord"></a>
+            <a href="telegram" class="button telegram"><img src="image4.png" alt="Telegram"></a>
+        </div>
+    </div>
+    
+    <footer>
+        <a href="mailto:contact@getsolara.dev" class="contact-button">Contact</a>
+        <p>© 2024 Solara by CMD Softworks. Assets ripped by Chillwave.</p>
+    </footer>
+
+    <script>
+        const image = document.getElementById('hover-image');
+
+        image.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = image.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+
+            const rotateX = y * 20;
+            const rotateY = -x * 20;
+
+            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(0.9)`;
+        });
+
+        image.addEventListener('mouseleave', () => {
+            image.style.transform = 'scale(0.9) rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+    
+</body>
+</html>
